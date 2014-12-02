@@ -22,7 +22,7 @@ var WhatColor =  (function () {
     };
 
     $.ajax({
-      url: "../assets/cams.json",
+      url: "./assets/cams.json",
       complete: function (data) {
         imageUrls = data.responseJSON.cams;
         grabImagesFromUrls(imageUrls);
