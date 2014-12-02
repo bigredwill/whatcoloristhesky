@@ -14,8 +14,12 @@ var WhatColor =  (function () {
     var getImageFromUrl = function (url) {
       return $.ajax({
         url: url,
+        datatype: "image/jpg",
         crossDomain: true,
-        complete: function (data) {
+        success: function (data) {
+          console.log(data);
+        },
+        error: function (data) {
           console.log(data);
         }
       });
