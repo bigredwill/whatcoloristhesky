@@ -3,6 +3,11 @@ var WhatColor =  (function () {
       images = [],
       colors = [],
       CF = new ColorThief();
+      var img = document.createElement('img');
+        img.src = "http://www.met.sjsu.edu/cam_directory/webcam3/latest.jpg";
+
+      CF.getPalette(img,1);
+      CF.getColor(img,1);
 
 
     // var camColorSteal = function() {
