@@ -1,13 +1,40 @@
---- !list of webcams and positions in sky
+# --- !list of webcams and positions in sky
+# url: <to image>
+# name: of webcam
+# bounding box for sky
+# top:
+# left:
+# bottom:
+# right:
 
--
-  - url : http://www.met.sjsu.edu/cam_directory/webcam3/latest.jpg
-    name: SJSU Meterology Webcam 3
-  - url: http://www.met.sjsu.edu/cam_directory/webcam2/latest.jpg
-    name: SJSU Meterology Webcam 2
-  - url: http://www.met.sjsu.edu/cam_directory/webcam1/latest.jpg
-    name: SJSU Meterology Webcam 1
-  - url: http://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG
-    name: Mt. Hamilton hamcam 1
-  - url: http://mthamilton.ucolick.org/hamcam/Cam2.ts.JPG
-    name: Mt. Hamilton hamcam 2
+
+- url : http://www.met.sjsu.edu/cam_directory/webcam3/latest.jpg
+  name: SJSU Meterology Webcam 3
+  top: 40
+  bottom: 360
+  left: 0
+  right: 1000
+- url: http://www.met.sjsu.edu/cam_directory/webcam2/latest.jpg
+  name: SJSU Meterology Webcam 2
+  top: 30
+  bottom: 375
+  left: 0
+  right: 1010
+- url: http://www.met.sjsu.edu/cam_directory/webcam1/latest.jpg
+  name: SJSU Meterology Webcam 1
+  top: 30
+  bottom: 275
+  left: 0
+  right: 1010
+- url: http://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG
+  name: Mt. Hamilton hamcam 1
+  top: 50
+  bottom: 375
+  left: 0
+  right: 1270
+- url: http://mthamilton.ucolick.org/hamcam/Cam2.ts.JPG
+  name: Mt. Hamilton hamcam 2
+  top: 50
+  bottom: 330
+  left: 0
+  right: 1270
