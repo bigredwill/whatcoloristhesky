@@ -3,16 +3,6 @@ var WhatColor =  (function () {
       images = [],
       colors = [],
       CF = new ColorThief();
-      var img = document.createElement('img');
-        img.src = "http://www.met.sjsu.edu/cam_directory/webcam3/latest.jpg";
-
-      CF.getPalette(img,1);
-      CF.getColor(img,1);
-
-
-    // var camColorSteal = function() {
-    //   CF.getPalette(images[0], 1);
-    // };
 
     var loadCams = function() {
       images = [];
@@ -24,8 +14,21 @@ var WhatColor =  (function () {
       };
       //Gets an Image from an url
       var getImageFromUrl = function (url) {
-        var img = document.createElement('img');
-        img.src = url;
+        // var img = new Image();
+        // img.src = url;
+        // img.crossOrigin = "Anonymous";
+        debugger;
+        // var img = document.createElement('img');
+        // img.src = url;
+        // img.crossOrigin = "Anonymous";
+
+
+        var wat = $.ajax({
+         url: "proxy.php",
+         data: {requrl: url}
+        });
+        console.log(wat);
+
         return img;
       };
       if(!imageUrls){

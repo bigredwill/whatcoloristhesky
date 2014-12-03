@@ -1,0 +1,13 @@
+--- !list of webcams and positions in sky
+
+-
+  - url : http://www.met.sjsu.edu/cam_directory/webcam3/latest.jpg
+    name: SJSU Meterology Webcam 3
+  - url: http://www.met.sjsu.edu/cam_directory/webcam2/latest.jpg
+    name: SJSU Meterology Webcam 2
+  - url: http://www.met.sjsu.edu/cam_directory/webcam1/latest.jpg
+    name: SJSU Meterology Webcam 1
+  - url: http://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG
+    name: Mt. Hamilton hamcam 1
+  - url: http://mthamilton.ucolick.org/hamcam/Cam2.ts.JPG
+    name: Mt. Hamilton hamcam 2
