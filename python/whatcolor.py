@@ -21,6 +21,7 @@ camlist = open("camlist.yaml")
 
 cams = yaml.load(camlist.read())
 
+# credit to fraxel, http://stackoverflow.com/a/9694246
 def closest_colour(requested_colour):
   min_colours = {}
   for key, name in webcolors.css3_hex_to_names.items():
