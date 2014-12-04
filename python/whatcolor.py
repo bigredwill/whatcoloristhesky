@@ -2,6 +2,8 @@ from PIL import Image as img
 from PIL import ImageDraw as imgDraw
 import urllib, cStringIO, yaml, tweepy, time, sys
 
+import webcolors
+
 
 secrets = open("secrets.yaml")
 secrets = yaml.load(secrets.read())
@@ -19,7 +21,23 @@ camlist = open("camlist.yaml")
 
 cams = yaml.load(camlist.read())
 
+def closest_colour(requested_colour):
+  min_colours = {}
+  for key, name in webcolors.css3_hex_to_names.items():
+      r_c, g_c, b_c = webcolors.hex_to_rgb(key)
+      rd = (r_c - requested_colour[0]) ** 2
+      gd = (g_c - requested_colour[1]) ** 2
+      bd = (b_c - requested_colour[2]) ** 2
+      min_colours[(rd + gd + bd)] = name
+  return min_colours[min(min_colours.keys())]
 
+def get_colour_name(requested_colour):
+  try:
+    closest_name = actual_name = webcolors.rgb_to_name(requested_colour)
+  except ValueError:
+    closest_name = closest_colour(requested_colour)
+    actual_name = None
+    return actual_name, closest_name
 
 def grabColor():
   # get size of all images so they fit into the blank_image
@@ -37,6 +55,7 @@ def grabColor():
     URL = x['url']
 
     file = cStringIO.StringIO(urllib.urlopen(URL).read())
+
     im = img.open(file)
 
     size = im.size
@@ -59,15 +78,19 @@ def grabColor():
 
   #finally, get color of the sky
   blank_image = blank_image.quantize(1).convert("RGB")
-  color = "rgb"+ str(blank_image.getpixel((3,3)))
+  onecolor = blank_image.getpixel((3,3))
+  #get name of closest color
+  actual_name, closest_name = get_colour_name(onecolor)
+  hexCode = webcolors.rgb_to_hex(onecolor)
 
   # Construct tweet
-  tweet = "The color of the sky in San Jose right now is " + color
+  tweet = "Looks like a " + str(closest_name) + " sky right now.\nhex: " + str(hexCode) + "\nrgb: " + str(onecolor) 
   # Create Color Square
-  blank_image = img.new("RGB", (400,400))
-  colorSquare = img.new("RGB", (400,400))
+  width = 1024
+  height = 512
+  colorSquare = img.new("RGB", (width,height))
   draw = imgDraw.Draw(colorSquare)
-  draw.rectangle([0,0,401,401],fill=color)
+  draw.rectangle([0,0,width,height],fill=hexCode)
   del draw
   # to-do: don't save image
   colorSquare.save("color.jpg")
