@@ -114,7 +114,7 @@ def grabColor():
     colorSquare.save("color.jpg")
     # Tweet!
     print tweet
-    # api.update_with_media("color.jpg", status=tweet)
+    api.update_with_media("color.jpg", status=tweet)
 
 grabColor()
 
