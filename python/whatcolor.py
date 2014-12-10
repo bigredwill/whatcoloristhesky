@@ -6,8 +6,10 @@ import urllib, cStringIO, yaml, tweepy, time, sys
 import webcolors
 
 lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "r")
-lastColor = lastColorFile.read()
+lastColor = lastColorFile.read().split('\n')
 print lastColor
+
+
 secrets = open("/home/pi/whatcoloristhesky/python/secrets.yaml")
 secrets = yaml.load(secrets.read())
 #enter the corresponding information from your Twitter application:
@@ -96,7 +98,14 @@ def grabColor():
   closest_name = get_colour_name(onecolor)
   hexCode = webcolors.rgb_to_hex(onecolor)
 
-  if str(closest_name)==lastColor:
+
+  sameColor = false
+
+  for i in lastColor
+    if str(closest_name)==lastColor:
+      sameColor = true
+
+  if sameColor == true:
     print "lastColor is the same " + str(closest_name)
   else:
     
@@ -120,8 +129,21 @@ def grabColor():
       didUpdate = False
       
     if didUpdate == True:
-      lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "w")
-      lastColorFile.write(str(closest_name))
+      lastColorFile = open("/home/pi/whatcoloristhesky/python/prevcolors.txt", "r+")
+      colors = lastColorFile.read().split('\n')
+      colors.append(str(closest_name))
+      colors.remove(colors[0])
+      skip = 0
+      toAppend = ""
+      for i in colors
+        if skip == 0:
+          print "skip"
+        else:
+          skip++
+          toAppend += str(i)
+          if skip != len(colors):
+            toAppend += "\n"  
+      lastColorFile.write(toAppend)
 
 grabColor()
 
