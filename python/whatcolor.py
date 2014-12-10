@@ -99,13 +99,13 @@ def grabColor():
   hexCode = webcolors.rgb_to_hex(onecolor)
 
 
-  sameColor = false
+  sameColor = False
 
-  for i in lastColor
+  for i in lastColor:
     if str(closest_name)==lastColor:
-      sameColor = true
+      sameColor = True
 
-  if sameColor == true:
+  if sameColor == True:
     print "lastColor is the same " + str(closest_name)
   else:
     
@@ -129,19 +129,20 @@ def grabColor():
       didUpdate = False
       
     if didUpdate == True:
-      lastColorFile = open("/home/pi/whatcoloristhesky/python/prevcolors.txt", "r+")
+      lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "r+")
       colors = lastColorFile.read().split('\n')
       colors.append(str(closest_name))
       colors.remove(colors[0])
       skip = 0
       toAppend = ""
-      for i in colors
+      for i in colors:
         if skip == 0:
           print "skip"
+	  skip = skip + 1
         else:
-          skip++
+          skip = skip + 1
           toAppend += str(i)
-          if skip != len(colors):
+          if skip != len(colors)-1:
             toAppend += "\n"  
       lastColorFile.write(toAppend)
 
