@@ -129,8 +129,9 @@ def grabColor():
       didUpdate = False
       
     if didUpdate == True:
-      lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "r+")
+      lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "r")
       colors = lastColorFile.read().split('\n')
+      lastColorFile.close()
       colors.append(str(closest_name))
       colors.remove(colors[0])
       skip = 0
@@ -138,13 +139,15 @@ def grabColor():
       for i in colors:
         if skip == 0:
           print "skip"
-	  skip = skip + 1
+	        skip = skip + 1
         else:
           skip = skip + 1
           toAppend += str(i)
           if skip != len(colors)-1:
-            toAppend += "\n"  
+            toAppend += "\n"
+      lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "w")
       lastColorFile.write(toAppend)
+      lastColorFile.close()
 
 grabColor()
 
