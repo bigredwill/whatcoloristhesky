@@ -102,7 +102,7 @@ def grabColor():
   sameColor = False
 
   for i in lastColor:
-    if str(closest_name)==lastColor:
+    if str(closest_name)==i:
       sameColor = True
 
   if sameColor == True:
@@ -133,18 +133,17 @@ def grabColor():
       colors = lastColorFile.read().split('\n')
       lastColorFile.close()
       colors.append(str(closest_name))
+      print str(colors)
       colors.remove(colors[0])
+      print str(colors)
       skip = 0
       toAppend = ""
       for i in colors:
-        if skip == 0:
-          print "skip"
-	        skip = skip + 1
-        else:
-          skip = skip + 1
-          toAppend += str(i)
-          if skip != len(colors)-1:
-            toAppend += "\n"
+        skip = skip + 1
+        toAppend += str(i)
+        if skip != len(colors)-1:
+          toAppend += "\n"
+      
       lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "w")
       lastColorFile.write(toAppend)
       lastColorFile.close()

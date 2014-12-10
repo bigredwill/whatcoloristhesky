@@ -1,7 +1,6 @@
-black
+darkgrey
 lightgrey
-black
-lightgrey
-lightslategrey
 grey
+black
 lightslategrey
+darkgray
