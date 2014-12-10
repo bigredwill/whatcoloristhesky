@@ -5,7 +5,9 @@ import urllib, cStringIO, yaml, tweepy, time, sys
 
 import webcolors
 
-
+lastColorFile = open("lastColor.txt", "r")
+lastColor = lastColorFile.read()
+print lastColor
 secrets = open("secrets.yaml")
 secrets = yaml.load(secrets.read())
 #enter the corresponding information from your Twitter application:
@@ -94,20 +96,25 @@ def grabColor():
   closest_name = get_colour_name(onecolor)
   hexCode = webcolors.rgb_to_hex(onecolor)
 
-  # Construct tweet
-  tweet = "Looks like a " + str(closest_name) + " sky right now.\nhex: " + str(hexCode) + "\nrgb: " + str(onecolor) 
-  # Create Color Square
-  width = 1024
-  height = 512
-  colorSquare = img.new("RGB", (width,height))
-  draw = imgDraw.Draw(colorSquare)
-  draw.rectangle([0,0,width,height],fill=hexCode)
-  del draw
-  # to-do: don't save image
-  colorSquare.save("color.jpg")
-  # Tweet!
-  print tweet
-  # api.update_with_media("color.jpg", status=tweet)
+  if str(closest_name)==lastColor:
+    print "lastColor is the same " + str(closest_name)
+  else:
+    lastColorFile = open("lastColor.txt", "w")
+    lastColorFile.write(str(closest_name))
+    # Construct tweet
+    tweet = "Looks like a " + str(closest_name) + " sky right now.\nhex: " + str(hexCode) + "\nrgb: " + str(onecolor) 
+    # Create Color Square
+    width = 1024
+    height = 512
+    colorSquare = img.new("RGB", (width,height))
+    draw = imgDraw.Draw(colorSquare)
+    draw.rectangle([0,0,width,height],fill=hexCode)
+    del draw
+    # to-do: don't save image
+    colorSquare.save("color.jpg")
+    # Tweet!
+    print tweet
+    # api.update_with_media("color.jpg", status=tweet)
 
 grabColor()
 
