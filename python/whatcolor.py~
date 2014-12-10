@@ -5,10 +5,12 @@ import urllib, cStringIO, yaml, tweepy, time, sys
 
 import webcolors
 
-lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "r")
+sys.path.append("~/whatcoloristhesky/")
+
+lastColorFile = open("lastColor.txt", "r")
 lastColor = lastColorFile.read()
 print lastColor
-secrets = open("/home/pi/whatcoloristhesky/python/secrets.yaml")
+secrets = open("secrets.yaml")
 secrets = yaml.load(secrets.read())
 #enter the corresponding information from your Twitter application:
 CONSUMER_KEY = secrets['consumer_key']
@@ -21,7 +23,7 @@ api = tweepy.API(auth)
 
 
 # camlist = open("cam2.yaml")
-camlist = open("/home/pi/whatcoloristhesky/python/camlist.yaml")
+camlist = open("camlist.yaml")
 
 cams = yaml.load(camlist.read())
 
@@ -87,7 +89,7 @@ def grabColor():
     blank_image.paste(x,(i,0))
     i += x.size[0]
 
-  blank_image.save("/home/pi/whatcoloristhesky/python/blank.jpg")
+  blank_image.save("blank.jpg")
 
   #finally, get color of the sky
   blank_image = blank_image.quantize(1).convert("RGB")
@@ -110,17 +112,17 @@ def grabColor():
     draw.rectangle([0,0,width,height],fill=hexCode)
     del draw
     # to-do: don't save image
-    colorSquare.save("/home/pi/whatcoloristhesky/python/color.jpg")
+    colorSquare.save("color.jpg")
     # Tweet!
     print tweet
     didUpdate = True
     try:
-      api.update_with_media("/home/pi/whatcoloristhesky/python/color.jpg", status=tweet)
+      api.update_with_media("color.jpg", status=tweet)
     except Exception, e:
       didUpdate = False
       
     if didUpdate == True:
-      lastColorFile = open("/home/pi/whatcoloristhesky/python/lastColor.txt", "w")
+      lastColorFile = open("lastColor.txt", "w")
       lastColorFile.write(str(closest_name))
 
 grabColor()

@@ -26,18 +26,18 @@
   bottom: 275
   left: 0
   right: 1010
-- url: http://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG
-  name: Mt. Hamilton hamcam 1
-  top: 50
-  bottom: 375
-  left: 0
-  right: 1270
-- url: http://mthamilton.ucolick.org/hamcam/Cam2.ts.JPG
-  name: Mt. Hamilton hamcam 2
-  top: 50
-  bottom: 330
-  left: 0
-  right: 1270
+#- url: http://mthamilton.ucolick.org/hamcam/Cam1.ts.JPG
+#  name: Mt. Hamilton hamcam 1
+#  top: 50
+#  bottom: 375
+#  left: 0
+#  right: 1270
+#- url: http://mthamilton.ucolick.org/hamcam/Cam2.ts.JPG
+#  name: Mt. Hamilton hamcam 2
+#  top: 50
+#  bottom: 330
+#  left: 0
+#  right: 1270
 # - url: http://mthamilton.ucolick.org/hamcam/skycam/current.jpg
 #   name: Lick Observatory SkyCam
 #   top: 100
