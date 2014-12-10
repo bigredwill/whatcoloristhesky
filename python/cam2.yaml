@@ -1,0 +1,6 @@
+- url: http://www.met.sjsu.edu/cam_directory/webcam2/latest.jpg
+  name: SJSU Meterology Webcam 2
+  top: 30
+  bottom: 375
+  left: 0
+  right: 1010

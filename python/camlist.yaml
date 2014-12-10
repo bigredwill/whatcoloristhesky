@@ -38,3 +38,9 @@
   bottom: 330
   left: 0
   right: 1270
+# - url: http://mthamilton.ucolick.org/hamcam/skycam/current.jpg
+#   name: Lick Observatory SkyCam
+#   top: 100
+#   bottom: 100
+#   left: 100
+#   right: 1000

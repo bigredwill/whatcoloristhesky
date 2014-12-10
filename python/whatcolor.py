@@ -1,3 +1,4 @@
+#!
 from PIL import Image as img
 from PIL import ImageDraw as imgDraw
 import urllib, cStringIO, yaml, tweepy, time, sys
@@ -17,6 +18,7 @@ auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
 
 
+# camlist = open("cam2.yaml")
 camlist = open("camlist.yaml")
 
 cams = yaml.load(camlist.read())
@@ -38,7 +40,7 @@ def get_colour_name(requested_colour):
   except ValueError:
     closest_name = closest_colour(requested_colour)
     actual_name = None
-    return actual_name, closest_name
+    return closest_name
 
 def grabColor():
   # get size of all images so they fit into the blank_image
@@ -48,6 +50,8 @@ def grabColor():
 
   #get size of images, crop them
   for x in cams:
+
+
     left = x['left']
     right = x['right']
     bottom = x['bottom']
@@ -56,17 +60,23 @@ def grabColor():
     URL = x['url']
 
     file = cStringIO.StringIO(urllib.urlopen(URL).read())
+    try:
+      im = img.open(file)
+      size = im.size
+      im = im.crop((left,top,right,bottom))
+      im = im.quantize(3).convert("RGB")
+      print(im.getpixel((3,3)))
 
-    im = img.open(file)
+      im.save(str(name) + ".jpg")
 
-    size = im.size
-    im = im.crop((left,top,right,bottom))
-    im = im.quantize(1).convert("RGB")
-    print(im.getpixel((3,3)))
+      minh = min(minh,right - left)
+      width += right - left
+      imgs.append(im)
+    except IOError:
+      print "image down" + str(IOError)
 
-    minh = min(minh,right - left)
-    width += right - left
-    imgs.append(im)
+
+    
 
   #put images in to one image
   i = 0
@@ -81,7 +91,7 @@ def grabColor():
   blank_image = blank_image.quantize(1).convert("RGB")
   onecolor = blank_image.getpixel((3,3))
   #get name of closest color
-  actual_name, closest_name = get_colour_name(onecolor)
+  closest_name = get_colour_name(onecolor)
   hexCode = webcolors.rgb_to_hex(onecolor)
 
   # Construct tweet
@@ -96,7 +106,8 @@ def grabColor():
   # to-do: don't save image
   colorSquare.save("color.jpg")
   # Tweet!
-  api.update_with_media("color.jpg", status=tweet)
+  print tweet
+  # api.update_with_media("color.jpg", status=tweet)
 
 grabColor()
 
