@@ -99,8 +99,7 @@ def grabColor():
   if str(closest_name)==lastColor:
     print "lastColor is the same " + str(closest_name)
   else:
-    lastColorFile = open("lastColor.txt", "w")
-    lastColorFile.write(str(closest_name))
+    
     # Construct tweet
     tweet = "Looks like a " + str(closest_name) + " sky right now.\nhex: " + str(hexCode) + "\nrgb: " + str(onecolor) 
     # Create Color Square
@@ -114,7 +113,15 @@ def grabColor():
     colorSquare.save("color.jpg")
     # Tweet!
     print tweet
-    api.update_with_media("color.jpg", status=tweet)
+    didUpdate = True
+    try:
+      api.update_with_media("color.jpg", status=tweet)
+    except Exception, e:
+      didUpdate = False
+      
+    if didUpdate == True:
+      lastColorFile = open("lastColor.txt", "w")
+      lastColorFile.write(str(closest_name))
 
 grabColor()
 
