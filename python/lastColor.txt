@@ -1,7 +1,0 @@
-black
-lightgrey
-black
-lightgrey
-lightslategrey
-grey
-lightslategrey
