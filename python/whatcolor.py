@@ -102,7 +102,7 @@ def grabColor():
   sameColor = False
 
   for i in lastColor:
-    if str(closest_name)==lastColor:
+    if str(closest_name)==i:
       sameColor = True
 
   if sameColor == True:
@@ -133,7 +133,9 @@ def grabColor():
       colors = lastColorFile.read().split('\n')
       lastColorFile.close()
       colors.append(str(closest_name))
+      print colors
       colors.remove(colors[0])
+      print colors
       skip = 0
       toAppend = ""
       for i in colors:
